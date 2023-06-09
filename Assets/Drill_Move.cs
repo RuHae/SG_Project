@@ -4,39 +4,37 @@ using UnityEngine;
 
 public class Drill_Move : MonoBehaviour
 {
-    private Rigidbody2D player;
-    public float rotationForce;
-    public float radius = 5;
-    public float angle;
-    public float center_x;
-    public float speed = 0.2f;
+    [SerializeField] private Camera camera;
+    [SerializeField] private KeyCode Right;
+    private float moveDirection = -1;
+    private float currentMoveDirection;
+    private Rigidbody2D RB;
+    public float MoveSpeed;
+    public float default_angle;
+    public float rotation_speed;
+    public float centerOffsetCamera = 4;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Rigidbody2D>();
-        angle = 5f * Mathf.Deg2Rad;
+        RB = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (Input.GetMouseButtonDown(0))
-        // {
-        //     player.AddForce(new Vector2(rotationForce*100, 0));
-        // }
-        
-        // angle += RotateSpeed * Time.deltaTime;
-        center_x = transform.position.x - radius;
-        var Pos = new Vector2(transform.position.x, transform.position.y);
+        if(Input.GetKeyDown(Right))
+        {
+            moveDirection = 1;
+        }else if(Input.GetKeyUp(Right)){
+            moveDirection = -1;
+        }
+        currentMoveDirection = Mathf.Lerp(currentMoveDirection, moveDirection, rotation_speed*Time.deltaTime);
+        transform.rotation = Quaternion.Euler(0, 0, default_angle*currentMoveDirection);
+        RB.velocity = (transform.up * -1) * MoveSpeed;
+        // RB.velocity = new Vector2(moveDirection, 0)* MoveSpeed;
 
-        var offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * radius * speed *Time.deltaTime;
-        player.transform.position = Pos + offset;
-        Quaternion target = Quaternion.Euler(0, 0, player.transform.rotation.z+1);
-        player.transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime);
-        Debug.Log(offset);
-        Debug.Log(transform.position);
-        Debug.Log(Mathf.Cos(angle));
-        Debug.Log(Mathf.Sin(angle));
+
+        camera.transform.position = new Vector3(0, transform.position.y - centerOffsetCamera, -10);
     }
 }
