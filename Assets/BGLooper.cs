@@ -4,25 +4,20 @@ using UnityEngine;
 
 public class BGLooper : MonoBehaviour {
 
-	public float speed = 0.1f;
-	private Vector2 offset = Vector2.zero;
-	private Material mat;
 	private GameObject Player = null;
+	private float offset;
 
 	// Use this for initialization
 	void Start () {
 		if (Player == null)
 				Player = GameObject.FindGameObjectWithTag("Player");
-
-		mat = GetComponent<Renderer> ().material;
-		offset = mat.GetTextureOffset ("_MainTex");
+		offset = transform.position.y - Player.transform.position.y;
 	}
-
 	// Update is called once per frame
 	void Update () {
-		offset.x += speed * Time.deltaTime;
-		mat.SetTextureOffset ("_MainTex", offset);
-		Debug.Log(Player.transform.position);
+		var Pos = new Vector2(transform.position.x, Player.transform.position.y);
+		transform.position = Pos;
+		Debug.Log(Pos);
 
 	}
 }
