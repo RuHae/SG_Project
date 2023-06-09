@@ -29,12 +29,12 @@ public class Drill_Move : MonoBehaviour
         }else if(Input.GetKeyUp(Right)){
             moveDirection = -1;
         }
-        currentMoveDirection = Mathf.Lerp(currentMoveDirection, moveDirection, rotation_speed*Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, default_angle*currentMoveDirection);
-        RB.velocity = (transform.up * -1) * MoveSpeed;
+        currentMoveDirection = Mathf.Lerp(currentMoveDirection, moveDirection, rotation_speed*Time.deltaTime); // Linear Interpolation for smoother rotation
+        transform.rotation = Quaternion.Euler(0, 0, default_angle*currentMoveDirection); // Rotation angle
+        RB.velocity = (transform.up * -1) * MoveSpeed;  // Drill going locally down
         // RB.velocity = new Vector2(moveDirection, 0)* MoveSpeed;
 
 
-        camera.transform.position = new Vector3(0, transform.position.y - centerOffsetCamera, -10);
+        camera.transform.position = new Vector3(0, transform.position.y - centerOffsetCamera, -10); // Camera default following the drill only on y direction
     }
 }
