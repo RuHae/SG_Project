@@ -17,7 +17,7 @@ public class BGLooper : MonoBehaviour {
 	void Update () {
 		var Pos = new Vector2(transform.position.x, Player.transform.position.y);
 		transform.position = Pos;
-		Debug.Log(Pos);
+		// Debug.Log(Pos);
 
 	}
 }
