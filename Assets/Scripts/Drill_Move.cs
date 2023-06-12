@@ -25,7 +25,7 @@ public class Drill_Move : MonoBehaviour
     private int score;
     private double fortschritt;
     private int verblieben;
-    public int erdkern = 600; //Erdmittelpunkt ist 6k km
+    public int erdkern; //Erdmittelpunkt ist 6k km
 
 
     // Start is called before the first frame update
@@ -35,6 +35,7 @@ public class Drill_Move : MonoBehaviour
         Drill = GetComponentInChildren<SpriteRenderer>();
         start = transform.position.y;
         textUI.text = "Score:" + score;
+        erdkern = 600;
     }
 
     // Update is called once per frame
@@ -81,7 +82,7 @@ public class Drill_Move : MonoBehaviour
         textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
 
         // 
-        if((erdkern-score) == 0){
+        if((erdkern - score) == 0){
             // ToDo Textbox: Sie haben Gewonnen die Erde ist zerstört
             SceneManager.LoadScene("Menu"); 
             GameManager.Instance.highscore = score;

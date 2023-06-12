@@ -10,24 +10,24 @@ public class ErdschichteSpawn : MonoBehaviour
 	public float posi;
 	public float firstSpawn;
 
-
 	// Use this for initialization
 	void Start () {
-
+			newSchicht(0f);
+			firstSpawn = 0f;
 	}
 
 	// Update is called once per frame
 	void Update () {
-			posi = player.position.y;
-			if((firstSpawn - 15f) > posi){
-				firstSpawn = posi;
-				newSchicht(posi);
-			}
+		posi = player.position.y;
+		if((firstSpawn - 12f) >= posi){
+			firstSpawn = posi;
+			newSchicht(posi);
+		}
 	}
 
-	public void newSchicht(float posi)
+	public void newSchicht(float posit)
 	{
-		GameObject obst = Instantiate(erdschicht[Random.Range(0,erdschicht.Length-1)], this.transform) as GameObject;
-		obst.transform.localPosition = new Vector3(Random.Range(7.3f,-7.3f),Random.Range(0,posi-15f),0);
+		GameObject obst = Instantiate(erdschicht[Random.Range(0,erdschicht.Length)], this.transform) as GameObject;
+		obst.transform.localPosition = new Vector3(0,posit+1f,0);
 	}	
 }
