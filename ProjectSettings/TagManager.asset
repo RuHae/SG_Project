@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Left_Wall
   - Right_Wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
