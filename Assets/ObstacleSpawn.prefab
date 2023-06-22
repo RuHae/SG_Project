@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3655840181731212431}
   - component: {fileID: -3334138740155367903}
   - component: {fileID: -4767479837141963083}
-  - component: {fileID: -2155995597456354565}
   m_Layer: 0
   m_Name: ObstacleSpawn
   m_TagString: Obstacle
@@ -152,18 +151,3 @@ PolygonCollider2D:
       - {x: 0.25, y: -0.43359375}
       - {x: 0.5, y: 0}
       - {x: 0.25, y: 0.43359375}
---- !u!114 &-2155995597456354565
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5657373452924853407}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f0e7ac69c86cd943844c9af99d2471a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hindernisse: []
-  player: {fileID: 0}
-  posi: 0

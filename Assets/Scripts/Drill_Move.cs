@@ -11,6 +11,7 @@ public class Drill_Move : MonoBehaviour
     [SerializeField] private Camera camera;
     [SerializeField] private KeyCode Right;
     [SerializeField] private TMP_Text textUI;
+    [SerializeField] private TMP_Text Meilenstein;
     private int counter = 0;
     private float moveDirection = -1;
     private float currentMoveDirection;
@@ -35,6 +36,7 @@ public class Drill_Move : MonoBehaviour
         Drill = GetComponentInChildren<SpriteRenderer>();
         start = transform.position.y;
         textUI.text = "Score:" + score;
+        Meilenstein.text = "";
         erdkern = 600;
     }
 
@@ -80,12 +82,26 @@ public class Drill_Move : MonoBehaviour
         fortschritt =  System.Math.Round(((start - transform.position.y)/erdkern)*100, 1);
         verblieben = erdkern - score;
         textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
-
+        if (score == 150f){
+            Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
+            // Time.timeScale = 0;
+            Invoke(nameof(DelayedClearMeilensteinText), 2.0f);
+        }else if (score == 300f){
+                Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
+        }else if (score == 450f){
+                Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
+        }
+        
         // 
         if((erdkern - score) == 0){
             // ToDo Textbox: Sie haben Gewonnen die Erde ist zerstört
+            Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
             SceneManager.LoadScene("Menu"); 
             GameManager.Instance.highscore = score;
         }
+    }
+    void DelayedClearMeilensteinText(){
+        Meilenstein.text = "";   
+        // Time.timeScale = 1;     
     }
 }

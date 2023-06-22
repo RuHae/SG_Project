@@ -7,6 +7,7 @@ TagManager:
   - Left_Wall
   - Right_Wall
   - Obstacle
+  - Meilenstein
   layers:
   - Default
   - TransparentFX
