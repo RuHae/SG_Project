@@ -117,22 +117,22 @@ public class Drill_Move : MonoBehaviour
 
         if (score == 15f){
             Zark.gameObject.SetActive(true);
-            audioS.clip = audio[0];
-            audioS.PlayOneShot(audioS.clip,0.7f);
             Time.timeScale = 0;
-            audioS.pitch = 1.2f;
+            audioS.clip = audio[0];
+            audioS.Play();
             Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
             StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 300f){
             Zark.gameObject.SetActive(true);
             Time.timeScale = 0;
-            audioS.PlayOneShot(audio[1],0.7f);
+            audioS.clip = audio[1];
+            audioS.Play();
             Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
             StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 450f){
             Zark.gameObject.SetActive(true);
-            audioS.PlayOneShot(audio[2],0.7f);
-            audioS.pitch = 1f;
+            audioS.clip = audio[2];
+            audioS.Play();            
             Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
             Time.timeScale = 0;
             StartCoroutine(DelayedClearMeilensteinText());

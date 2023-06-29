@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance;
     public int highscore = 0;
-    public AudioSource audioSource;
-    
+
     void Awake(){
         if(Instance == null){
             Instance = this;
