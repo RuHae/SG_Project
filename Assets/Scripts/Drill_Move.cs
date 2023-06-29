@@ -155,6 +155,6 @@ public class Drill_Move : MonoBehaviour
         }
         Meilenstein.text = "";
         Zark.gameObject.SetActive(false);
-        Time.timeScale = 1;     
+        Time.timeScale = 1;
     }
 }
