@@ -19,7 +19,7 @@ public class Obstacle : MonoBehaviour {
 		} else if(transform.position.x <= -7.4){
 			speed = -speed;
 		}
-		myBody.velocity = new Vector2 (speed*Time.deltaTime*GameManager.customTimeScale, 0);
+		myBody.velocity = new Vector2 (speed, 0);
 
 	}
 }
