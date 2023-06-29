@@ -7,9 +7,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
 
-
-
-
 public class Drill_Move : MonoBehaviour
 {
     [SerializeField] private Camera camera;
@@ -87,7 +84,7 @@ public class Drill_Move : MonoBehaviour
         if (other.gameObject.CompareTag("Erdschicht1")){
             Debug.Log("Erdschicht1");
             default_angle = 20;
-            MoveSpeed = 20;
+            MoveSpeed = 8;
         }
         if(other.gameObject.CompareTag("Erdschicht2")){
             Debug.Log("Erdschicht2");
@@ -96,18 +93,18 @@ public class Drill_Move : MonoBehaviour
         }
         if(other.gameObject.CompareTag("Erdschicht3")){
             Debug.Log("Erdschicht3");
-            default_angle = 60;
-            MoveSpeed = 25;
+            default_angle = 50;
+            MoveSpeed = 10;
         }
         if(other.gameObject.CompareTag("Erdschicht4")){
             Debug.Log("Erdschicht4");
             default_angle = 10;
-            MoveSpeed = 40;
+            MoveSpeed = 13;
         }
         if(other.gameObject.CompareTag("Erdschicht5")){
             Debug.Log("Erdschicht5");
             default_angle = 20;
-            MoveSpeed = 45;
+            MoveSpeed = 14;
         }
     }
     void Calculation(){
@@ -120,17 +117,22 @@ public class Drill_Move : MonoBehaviour
 
         if (score == 150f){
             Zark.gameObject.SetActive(true);
-            audioS.PlayOneShot(audio[0]);
+            Time.timeScale = 0;
+            audioS.pitch = 1f;
+            audioS.PlayOneShot(audio[0],0.7f);
             Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
             Time.timeScale = 0;
             StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 300f){
             Zark.gameObject.SetActive(true);
-            Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
             Time.timeScale = 0;
+            audioS.PlayOneShot(audio[1],0.7f);
+            Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
             StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 450f){
             Zark.gameObject.SetActive(true);
+            audioS.PlayOneShot(audio[2],0.7f);
+            audioS.pitch = 1f;
             Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
             Time.timeScale = 0;
             StartCoroutine(DelayedClearMeilensteinText());
@@ -138,6 +140,7 @@ public class Drill_Move : MonoBehaviour
         
         // 
         if((erdkern - score) == 0){
+            audioS.PlayOneShot(audio[3],0.7f);
             Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
             SceneManager.LoadScene("Menu"); 
             GameManager.Instance.highscore = score;

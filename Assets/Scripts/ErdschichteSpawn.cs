@@ -19,7 +19,7 @@ public class ErdschichteSpawn : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		posi = player.position.y;
-		if((firstSpawn - 12f) >= posi){
+		if((firstSpawn - 23f) >= posi){
 			firstSpawn = posi;
 			newSchicht(posi);
 		}
@@ -27,8 +27,8 @@ public class ErdschichteSpawn : MonoBehaviour
 
 	public void newSchicht(float posit)
 	{ // obst in eine queque wenn ein paar drin sind die alten Löschen
-	
-		GameObject obst = Instantiate(erdschicht[Random.Range(0,erdschicht.Length)], this.transform) as GameObject;
-		obst.transform.localPosition = new Vector3(0,posit+1f,0);
-	}	
+		
+			GameObject obst = Instantiate(erdschicht[Random.Range(0,erdschicht.Length)], this.transform) as GameObject;
+			obst.transform.localPosition = new Vector3(0,posit+1f,0);
+	}
 }
