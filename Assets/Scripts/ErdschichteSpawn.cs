@@ -26,7 +26,8 @@ public class ErdschichteSpawn : MonoBehaviour
 	}
 
 	public void newSchicht(float posit)
-	{
+	{ // obst in eine queque wenn ein paar drin sind die alten Löschen
+	
 		GameObject obst = Instantiate(erdschicht[Random.Range(0,erdschicht.Length)], this.transform) as GameObject;
 		obst.transform.localPosition = new Vector3(0,posit+1f,0);
 	}	

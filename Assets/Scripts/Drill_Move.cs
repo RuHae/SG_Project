@@ -4,6 +4,10 @@ using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using UnityEngine.Audio;
+
+
 
 
 public class Drill_Move : MonoBehaviour
@@ -12,11 +16,14 @@ public class Drill_Move : MonoBehaviour
     [SerializeField] private KeyCode Right;
     [SerializeField] private TMP_Text textUI;
     [SerializeField] private TMP_Text Meilenstein;
+    [SerializeField] private Image Zark;
+    [SerializeField] private AudioClip[] audio;
     private int counter = 0;
     private float moveDirection = -1;
     private float currentMoveDirection;
     private Rigidbody2D RB;
     private SpriteRenderer Drill;
+    private AudioSource audioS;
     public float MoveSpeed;
     public float default_angle;
     public float rotation_speed;
@@ -34,6 +41,7 @@ public class Drill_Move : MonoBehaviour
     {
         RB = GetComponent<Rigidbody2D>();
         Drill = GetComponentInChildren<SpriteRenderer>();
+        audioS = GetComponent<AudioSource>();
         start = transform.position.y;
         textUI.text = "Score:" + score;
         Meilenstein.text = "";
@@ -75,6 +83,28 @@ public class Drill_Move : MonoBehaviour
             }
         }
     }
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.CompareTag("Erdschicht1")){
+            Debug.Log("Erdschicht1");
+            //ToDo speed und Angle anpassen & Verschwinden wenn außerhalb vom Bild
+        }
+        if(other.gameObject.CompareTag("Erdschicht2")){
+            Debug.Log("Erdschicht2");
+            //ToDo speed und Angle anpassen
+        }
+        if(other.gameObject.CompareTag("Erdschicht3")){
+            Debug.Log("Erdschicht3");
+            //ToDo speed und Angle anpassen
+        }
+        if(other.gameObject.CompareTag("Erdschicht4")){
+            Debug.Log("Erdschicht4");
+            //ToDo speed und Angle anpassen
+        }
+        if(other.gameObject.CompareTag("Erdschicht5")){
+            Debug.Log("Erdschicht5");
+            //ToDo speed und Angle anpassen
+        }
+    }
     void Calculation(){
         // calculate score and set the TextUI
         current = (int)(transform.position.y + 0.5f);
@@ -82,26 +112,42 @@ public class Drill_Move : MonoBehaviour
         fortschritt =  System.Math.Round(((start - transform.position.y)/erdkern)*100, 1);
         verblieben = erdkern - score;
         textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
+
         if (score == 150f){
+            Zark.gameObject.SetActive(true);
+            audioS.PlayOneShot(audio[0]);
             Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
-            // Time.timeScale = 0;
-            Invoke(nameof(DelayedClearMeilensteinText), 2.0f);
+            Time.timeScale = 0;
+            StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 300f){
-                Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
+            Zark.gameObject.SetActive(true);
+            Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
+            Time.timeScale = 0;
+            StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 450f){
-                Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
+            Zark.gameObject.SetActive(true);
+            Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
+            Time.timeScale = 0;
+            StartCoroutine(DelayedClearMeilensteinText());
         }
         
         // 
         if((erdkern - score) == 0){
-            // ToDo Textbox: Sie haben Gewonnen die Erde ist zerstört
             Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
             SceneManager.LoadScene("Menu"); 
             GameManager.Instance.highscore = score;
         }
     }
-    void DelayedClearMeilensteinText(){
-        Meilenstein.text = "";   
-        // Time.timeScale = 1;     
+    IEnumerator DelayedClearMeilensteinText(){
+        float currentTime = 0;
+        float maxTime = 5;
+        while(currentTime<maxTime){ // alernative yield return new WaitForSecondsRealtime(5);
+            currentTime += Time.unscaledDeltaTime;
+            yield return null;
+        } 
+        Meilenstein.text = "";
+        Zark.gameObject.SetActive(false);
+   
+        Time.timeScale = 1;     
     }
 }

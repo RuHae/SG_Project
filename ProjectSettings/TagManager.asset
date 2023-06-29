@@ -8,6 +8,12 @@ TagManager:
   - Right_Wall
   - Obstacle
   - Meilenstein
+  - Erdschicht2
+  - Erdschicht3
+  - Erdschicht4
+  - Erdschicht1
+  - Erdschicht5
+  - Asset
   layers:
   - Default
   - TransparentFX
