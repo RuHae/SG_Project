@@ -30,6 +30,7 @@ public class Drill_Move : MonoBehaviour
     private int score;
     private double fortschritt;
     private int verblieben;
+    private bool canPlayNext = true;
     public int erdkern; //Erdmittelpunkt ist 6k km
 
 
@@ -48,6 +49,7 @@ public class Drill_Move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Calculation();
         if(Input.GetKeyDown(Right))
         {
             moveDirection = 1;
@@ -58,9 +60,7 @@ public class Drill_Move : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, default_angle*currentMoveDirection); // Rotation angle
         RB.velocity = (transform.up * -1) * MoveSpeed;  // Drill going locally down
         // RB.velocity = new Vector2(moveDirection, 0)* MoveSpeed;
-        Calculation();
        
-
         camera.transform.position = new Vector3(0, transform.position.y - centerOffsetCamera, -10); // Camera default following the drill only on y direction
     }
 
@@ -76,7 +76,6 @@ public class Drill_Move : MonoBehaviour
                     GameManager.Instance.highscore = score; // set score as Highscore if it is higher then the old one
                 }
                 SceneManager.LoadScene("Menu");
-
             }
         }
     }
@@ -114,41 +113,42 @@ public class Drill_Move : MonoBehaviour
         fortschritt =  System.Math.Round(((start - transform.position.y)/erdkern)*100, 1);
         verblieben = erdkern - score;
         textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
-
-        if (score == 15f){
+        
+        if(canPlayNext == true){
+        if (score == 15){
             Zark.gameObject.SetActive(true);
             Time.timeScale = 0;
             audioS.clip = audio[0];
             audioS.Play();
             Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
             StartCoroutine(DelayedClearMeilensteinText());
-        }else if (score == 300f){
+        }else if (score == 30){
             Zark.gameObject.SetActive(true);
             Time.timeScale = 0;
             audioS.clip = audio[1];
             audioS.Play();
             Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
             StartCoroutine(DelayedClearMeilensteinText());
-        }else if (score == 450f){
+        }else if (score == 450){
             Zark.gameObject.SetActive(true);
             audioS.clip = audio[2];
             audioS.Play();            
             Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
             Time.timeScale = 0;
             StartCoroutine(DelayedClearMeilensteinText());
-        }
-        
-        // 
-        if((erdkern - score) == 0){
-            audioS.PlayOneShot(audio[3],0.7f);
+        }else if((erdkern - score) == 0){
+            audioS.PlayOneShot(audio[3]);
             Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
             SceneManager.LoadScene("Menu"); 
             GameManager.Instance.highscore = score;
         }
+        }
     }
     IEnumerator DelayedClearMeilensteinText(){
+        canPlayNext = false;
         float currentTime = 0;
-        float maxTime = 5;
+        float maxTime = audioS.clip.length;
+        score += 1;
         while(currentTime<maxTime){ // alernative yield return new WaitForSecondsRealtime(5);
             currentTime += Time.unscaledDeltaTime;
             yield return null;
@@ -156,5 +156,7 @@ public class Drill_Move : MonoBehaviour
         Meilenstein.text = "";
         Zark.gameObject.SetActive(false);
         Time.timeScale = 1;
+        yield return new WaitForSecondsRealtime(1);
+        canPlayNext = true;
     }
 }
