@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -213.5, y: -51}
-  m_SizeDelta: {x: 132.99, y: 129.8646}
+  m_AnchoredPosition: {x: -237.5497, y: -36.2934}
+  m_SizeDelta: {x: 181.0894, y: 159.2773}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &354137381
 MonoBehaviour:
@@ -648,6 +648,7 @@ GameObject:
   - component: {fileID: 1290419455}
   - component: {fileID: 1290419454}
   - component: {fileID: 1290419456}
+  - component: {fileID: 1290419457}
   m_Layer: 0
   m_Name: Drill
   m_TagString: Player
@@ -761,7 +762,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: b676475de6c914e4e8f681ef1c817178, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.811
-  m_Pitch: 1.4
+  m_Pitch: 2.2
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -844,6 +845,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1290419457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290419448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f3224a857f28f458a04b6e2f74fcb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1320927082
 GameObject:
   m_ObjectHideFlags: 0

@@ -115,13 +115,13 @@ public class Drill_Move : MonoBehaviour
         verblieben = erdkern - score;
         textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
 
-        if (score == 150f){
+        if (score == 15f){
             Zark.gameObject.SetActive(true);
+            audioS.clip = audio[0];
+            audioS.PlayOneShot(audioS.clip,0.7f);
             Time.timeScale = 0;
-            audioS.pitch = 1f;
-            audioS.PlayOneShot(audio[0],0.7f);
+            audioS.pitch = 1.2f;
             Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
-            Time.timeScale = 0;
             StartCoroutine(DelayedClearMeilensteinText());
         }else if (score == 300f){
             Zark.gameObject.SetActive(true);
@@ -152,10 +152,9 @@ public class Drill_Move : MonoBehaviour
         while(currentTime<maxTime){ // alernative yield return new WaitForSecondsRealtime(5);
             currentTime += Time.unscaledDeltaTime;
             yield return null;
-        } 
+        }
         Meilenstein.text = "";
         Zark.gameObject.SetActive(false);
-   
         Time.timeScale = 1;     
     }
 }
