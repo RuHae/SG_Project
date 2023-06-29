@@ -53,10 +53,13 @@ public class Drill_Endless : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision){
+        Color red_light = new Color(1f, 0.5f, 0.5f);
+        Color red_dark = new Color(1f, 0f, 0f);
+        
         if (collision.gameObject.CompareTag("Obstacle")){
             counter += 1;
-            if (counter == 1) Drill.color = Color.magenta; // change color of drill after collision
-            if (counter == 2) Drill.color = Color.red; 
+            if (counter == 1) Drill.material.color = red_light; //Color(1f, 0f,0f); // change color of drill after collision
+            if (counter == 2) Drill.material.color = red_dark; //Color.red; 
             Debug.Log("hit Obstacle");
             Destroy(collision.gameObject); // destroy obstacle we hit
             if(counter == 3){

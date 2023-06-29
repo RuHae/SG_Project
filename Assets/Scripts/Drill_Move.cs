@@ -65,10 +65,12 @@ public class Drill_Move : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D collision){
+        Color red_light = new Color(1f, 0.5f, 0.5f);
+        Color red_dark = new Color(1f, 0f, 0f);
         if (collision.gameObject.CompareTag("Obstacle")){
             counter += 1;
-            if (counter == 1) Drill.color = Color.magenta; // change color of drill after collision
-            if (counter == 2) Drill.color = Color.red; 
+            if (counter == 1) Drill.material.color = red_light; //Color(1f, 0f,0f); // change color of drill after collision
+            if (counter == 2) Drill.material.color = red_dark; //Color.red; 
             Debug.Log("hit Obstacle");
             Destroy(collision.gameObject); // destroy obstacle we didn't hit
             if(counter == 3){
@@ -112,17 +114,18 @@ public class Drill_Move : MonoBehaviour
         score = (int)(start+0.5f) - current;
         fortschritt =  System.Math.Round(((start - transform.position.y)/erdkern)*100, 1);
         verblieben = erdkern - score;
-        textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
+        //textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
+        textUI.text = "Score:" + score + "\t" + "Fortschritt:" + fortschritt +"%" +"\t" + "Verblieben:" + verblieben;
         
         if(canPlayNext == true){
-        if (score == 15){
+        if (score == 125){
             Zark.gameObject.SetActive(true);
             Time.timeScale = 0;
             audioS.clip = audio[0];
             audioS.Play();
             Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
             StartCoroutine(DelayedClearMeilensteinText());
-        }else if (score == 30){
+        }else if (score == 250){
             Zark.gameObject.SetActive(true);
             Time.timeScale = 0;
             audioS.clip = audio[1];
