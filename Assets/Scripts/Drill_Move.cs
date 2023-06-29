@@ -142,7 +142,7 @@ public class Drill_Move : MonoBehaviour
         }else if((erdkern - score) == 0){
             audioS.PlayOneShot(audio[3]);
             Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
-            SceneManager.LoadScene("Menu"); 
+            SceneManager.LoadScene("Menu");
             GameManager.Instance.highscore = score;
         }
         }
