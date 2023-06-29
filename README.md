@@ -181,7 +181,7 @@ obst.transform.localPosition = new Vector3(
 
 ### Aufgaben:
 
-In dieser Aufgabe haben wir 3 Meilensteine implementiert. Diese werden bei einem Score von 125, 250, 450 angezeigt. Im [Bild][Bild1] unten ist ein Beispiel zu sehen.  Während des Spiels spricht Zark in einer von [AI generierten](https://micmonster.com/) Stimme zusätzlich, das was auf dem Bild geschrieben steht. Im Bild ist auch zusehen, wie groß der Fortschritt bzw. der noch verbleibende Weg ist.
+In dieser Aufgabe haben wir 3 Meilensteine implementiert. Diese werden bei einem Score von 150, 300, 450 angezeigt. Im [Bild][Bild1] unten ist ein Beispiel zu sehen.  Während des Spiels spricht Zark in einer von [AI generierten](https://micmonster.com/) Stimme zusätzlich, das was auf dem Bild geschrieben steht. Im Bild ist auch zusehen, wie groß der Fortschritt bzw. der noch verbleibende Weg ist.
 
 [Bild1]: ./README_images/image-20230629225744920.png
 
