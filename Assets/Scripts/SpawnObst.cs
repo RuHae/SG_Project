@@ -10,6 +10,7 @@ public class SpawnObst : MonoBehaviour {
 	// Use this for initialization
 	[SerializeField] GameObject[] hindernisse;
 	[SerializeField] Transform player;
+	public Queue<GameObject> obstQueue = new Queue<GameObject>();
 
 	List<GameObject> hindernisseZumErscheinen = new List<GameObject>();
 	public float posi;
@@ -33,8 +34,12 @@ public class SpawnObst : MonoBehaviour {
 	}
 
 	public void newObstacle(float posi)
-	{
+	{	
 		GameObject obst = Instantiate(hindernisse[Random.Range(0,hindernisse.Length)], this.transform) as GameObject;
 		obst.transform.localPosition = new Vector3(Random.Range(7.3f,-7.3f),Random.Range(firstSpawn,firstSpawn-12f),0);
+		obstQueue.Enqueue(obst);
+		if(obstQueue.Count > 6){
+			Destroy(obstQueue.Dequeue());
+		}
 	}
 }

@@ -30,7 +30,7 @@ public class ErdschichteSpawn : MonoBehaviour
 	}
 
 	public void newSchicht(float posit)
-	{ // obst in eine queque wenn ein paar drin sind die alten Löschen
+	{ 
 		if(counter == 0 ){
 			schicht1 = Instantiate(erdschicht[Random.Range(0,erdschicht.Length)], this.transform) as GameObject;
 			schicht1.transform.localPosition = new Vector3(0,posit+1f,0);
@@ -47,7 +47,5 @@ public class ErdschichteSpawn : MonoBehaviour
 			counter = 0;
 			Destroy(schicht1);
 		}
-		// GameObject obst = Instantiate(erdschicht[Random.Range(0,erdschicht.Length)], this.transform) as GameObject;
-		// obst.transform.localPosition = new Vector3(0,posit+1f,0);
 	}
 }
