@@ -86,23 +86,28 @@ public class Drill_Move : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Erdschicht1")){
             Debug.Log("Erdschicht1");
-            //ToDo speed und Angle anpassen & Verschwinden wenn außerhalb vom Bild
+            default_angle = 20;
+            MoveSpeed = 20;
         }
         if(other.gameObject.CompareTag("Erdschicht2")){
             Debug.Log("Erdschicht2");
-            //ToDo speed und Angle anpassen
+            default_angle = 40;
+            MoveSpeed = 10;
         }
         if(other.gameObject.CompareTag("Erdschicht3")){
             Debug.Log("Erdschicht3");
-            //ToDo speed und Angle anpassen
+            default_angle = 60;
+            MoveSpeed = 25;
         }
         if(other.gameObject.CompareTag("Erdschicht4")){
             Debug.Log("Erdschicht4");
-            //ToDo speed und Angle anpassen
+            default_angle = 10;
+            MoveSpeed = 40;
         }
         if(other.gameObject.CompareTag("Erdschicht5")){
             Debug.Log("Erdschicht5");
-            //ToDo speed und Angle anpassen
+            default_angle = 20;
+            MoveSpeed = 45;
         }
     }
     void Calculation(){
