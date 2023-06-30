@@ -43,7 +43,7 @@ public class Drill_Move : MonoBehaviour
         start = transform.position.y;
         textUI.text = "Score:" + score;
         Meilenstein.text = "";
-        erdkern = 60;
+        erdkern = 600;
     }
 
     // Update is called once per frame
@@ -111,15 +111,15 @@ public class Drill_Move : MonoBehaviour
         textUI.text = "Score:" + score + "\t" + "Fortschritt:" + fortschritt +"%" +"\t" + "Verblieben:" + verblieben;
         
         if(canPlayNext == true){
-            if (score == 15){
+            if (score == 150){
                 audioS.clip = audio[0];
                 Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
                 StartCoroutine(DelayedClearMeilensteinText());
-            }else if (score == 30){
+            }else if (score == 300){
                 audioS.clip = audio[1];
                 Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
                 StartCoroutine(DelayedClearMeilensteinText());
-            }else if (score == 45){
+            }else if (score == 450){
                 audioS.clip = audio[2];
                 Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
                 StartCoroutine(DelayedClearMeilensteinText());
