@@ -43,7 +43,7 @@ public class Drill_Move : MonoBehaviour
         start = transform.position.y;
         textUI.text = "Score:" + score;
         Meilenstein.text = "";
-        erdkern = 600;
+        erdkern = 60;
     }
 
     // Update is called once per frame
@@ -111,15 +111,15 @@ public class Drill_Move : MonoBehaviour
         textUI.text = "Score:" + score + "\t" + "Fortschritt:" + fortschritt +"%" +"\t" + "Verblieben:" + verblieben;
         
         if(canPlayNext == true){
-            if (score == 150){
+            if (score == 15){
                 audioS.clip = audio[0];
                 Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
                 StartCoroutine(DelayedClearMeilensteinText());
-            }else if (score == 300){
+            }else if (score == 30){
                 audioS.clip = audio[1];
                 Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
                 StartCoroutine(DelayedClearMeilensteinText());
-            }else if (score == 450){
+            }else if (score == 45){
                 audioS.clip = audio[2];
                 Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
                 StartCoroutine(DelayedClearMeilensteinText());
@@ -130,7 +130,7 @@ public class Drill_Move : MonoBehaviour
                 if(erdkern > GameManager.Instance.highscore){
                     GameManager.Instance.highscore = erdkern; // set score as Highscore if it is higher then the old one
                 }
-                SceneManager.LoadScene("Menu"); 
+                StartCoroutine(ReachedEnd());
             }
         }
     }
@@ -151,5 +151,16 @@ public class Drill_Move : MonoBehaviour
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);
         canPlayNext = true;
+    }
+
+    IEnumerator ReachedEnd(){
+        Time.timeScale = 0;
+        float currentTime = 0;
+        float maxTimes = audioS.clip.length;
+        while(currentTime<maxTimes){ // alernative yield return new WaitForSecondsRealtime(5);
+            currentTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene("Menu"); 
     }
 }
