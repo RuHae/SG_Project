@@ -114,7 +114,6 @@ public class Drill_Move : MonoBehaviour
         score = (int)(start+0.5f) - current;
         fortschritt =  System.Math.Round(((start - transform.position.y)/erdkern)*100, 1);
         verblieben = erdkern - score;
-        //textUI.text = "Score:" + score + "\n" + "Fortschritt:" + fortschritt +"%" +"\n" + "Verblieben:" + verblieben;
         textUI.text = "Score:" + score + "\t" + "Fortschritt:" + fortschritt +"%" +"\t" + "Verblieben:" + verblieben;
         
         if(canPlayNext == true){
@@ -142,8 +141,11 @@ public class Drill_Move : MonoBehaviour
         }
     }
     IEnumerator DelayedClearMeilensteinText(){
+        Time.timeScale = 0;
+        Zark.gameObject.SetActive(true);
         canPlayNext = false;
         float currentTime = 0;
+        audioS.Play();
         float maxTime = audioS.clip.length;
         score += 1;
         while(currentTime<maxTime){ // alernative yield return new WaitForSecondsRealtime(5);
