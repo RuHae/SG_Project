@@ -118,33 +118,27 @@ public class Drill_Move : MonoBehaviour
         textUI.text = "Score:" + score + "\t" + "Fortschritt:" + fortschritt +"%" +"\t" + "Verblieben:" + verblieben;
         
         if(canPlayNext == true){
-        if (score == 125){
-            Zark.gameObject.SetActive(true);
-            Time.timeScale = 0;
-            audioS.clip = audio[0];
-            audioS.Play();
-            Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
-            StartCoroutine(DelayedClearMeilensteinText());
-        }else if (score == 250){
-            Zark.gameObject.SetActive(true);
-            Time.timeScale = 0;
-            audioS.clip = audio[1];
-            audioS.Play();
-            Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
-            StartCoroutine(DelayedClearMeilensteinText());
-        }else if (score == 450){
-            Zark.gameObject.SetActive(true);
-            audioS.clip = audio[2];
-            audioS.Play();            
-            Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
-            Time.timeScale = 0;
-            StartCoroutine(DelayedClearMeilensteinText());
-        }else if((erdkern - score) == 0){
-            audioS.PlayOneShot(audio[3]);
-            Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
-            SceneManager.LoadScene("Menu");
-            GameManager.Instance.highscore = score;
-        }
+            if (score == 150){
+                audioS.clip = audio[0];
+                Meilenstein.text = "Sie haben leichte Erdbeben ausgelöst.";
+                StartCoroutine(DelayedClearMeilensteinText());
+            }else if (score == 300){
+                audioS.clip = audio[1];
+                Meilenstein.text = "Australien und Europa sind unter Wasser. Die Menschheit gerät in Panik";
+                StartCoroutine(DelayedClearMeilensteinText());
+            }else if (score == 450){
+                audioS.clip = audio[2];
+                Meilenstein.text = "Die USA ist ebenfalls Unterwasser." + "\n" + "Ein Großteil der Menschheit wurde evakuiert.";
+                StartCoroutine(DelayedClearMeilensteinText());
+            }else if((erdkern - score) == 0){
+                audioS.clip = audio[3];
+                Meilenstein.text = "Sie haben den Erdkern erreicht und die Erde zerstört";
+                StartCoroutine(DelayedClearMeilensteinText());
+                if(erdkern > GameManager.Instance.highscore){
+                    GameManager.Instance.highscore = erdkern; // set score as Highscore if it is higher then the old one
+                }
+                StartCoroutine(ReachedEnd());
+            }
         }
     }
     IEnumerator DelayedClearMeilensteinText(){
@@ -161,5 +155,16 @@ public class Drill_Move : MonoBehaviour
         Time.timeScale = 1;
         yield return new WaitForSecondsRealtime(1);
         canPlayNext = true;
+    }
+
+    IEnumerator ReachedEnd(){
+        Time.timeScale = 0;
+        float currentTime = 0;
+        float maxTimes = audioS.clip.length;
+        while(currentTime<maxTimes){ // alernative yield return new WaitForSecondsRealtime(5);
+            currentTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene("Menu"); 
     }
 }
