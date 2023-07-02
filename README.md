@@ -223,5 +223,3 @@ Der Link zum Spiel kann [oben](#Link) im Dokument gefunden werden.
 ```c#
 // TODO 
 ```
-
-[Meilenstein]: 
