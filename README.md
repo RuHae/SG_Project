@@ -1,12 +1,12 @@
 # Dev Diary - Serious Games Projekt
 
-Von Ella Pohl und Ruben Härle
+Von Ella Pohl und Ruben Härle (Gruppe 33)
 
 ---
 
 ## Link
 
-[Link zum Spiel](https://link_ins_nichts)
+[Link zum Spiel](https://play.unity.com/mg/other/dr-ill-sb)
 
 ---
 
